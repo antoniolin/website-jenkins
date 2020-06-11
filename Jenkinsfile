@@ -14,7 +14,12 @@ pipeline {
 
     stage('Build image') {
       steps{
-        def customImage = docker.build("my-image:${env.BUILD_ID}")
+        docker.withRegistry('localhost:5000/antonio') {
+
+        docker.image('http-server-v1').inside {
+            sh 'make test'
+        }
+    }
       }
     }
 
