@@ -2,7 +2,11 @@ pipeline {
 
   agent { 
     label 'jnlp-slave'
-    dockerfile true
+    docker {
+        image 'localhost:5000/antonio/http-server-v1'
+        label 'check-test-v1'
+        registryUrl 'localhost:5000'
+    }
   }
 
   stages {
