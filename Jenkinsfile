@@ -1,7 +1,10 @@
 pipeline {
 
   agent {
-    dockerfile true    
+    docker {
+        image 'localhost:5000/antonio/http-server-v1'
+        registryUrl 'localhost:5000'
+    }
   }
 
   stages {
@@ -9,17 +12,6 @@ pipeline {
     stage('Checkout Source') {
       steps {
         git 'https://github.com/antoniolin/website-jenkins.git'
-      }
-    }
-
-    stage('Build image') {
-      steps{
-        docker.withRegistry('localhost:5000/antonio') {
-
-        docker.image('http-server-v1').inside {
-            sh 'make test'
-        }
-    }
       }
     }
 
