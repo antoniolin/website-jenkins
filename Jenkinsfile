@@ -2,7 +2,7 @@ pipeline {
 
   agent { 
     label 'jnlp-slave'
-    dockerfile true 
+ 
   }
 
   stages {
